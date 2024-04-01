@@ -1,0 +1,1 @@
+fried rice,pepper,10.0,true,FOOD

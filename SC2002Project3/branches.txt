@@ -1,0 +1,2 @@
+4,Monday,8am to 9am,punggol
+123,monday-friday,10am to 11pm,punggol

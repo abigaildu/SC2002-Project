@@ -1,14 +1,16 @@
 package console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Cart {
     private List<CartItem> cartItems; // Correctly manage a list of CartItem objects
     private static int cartID = 1;
-    private boolean dineIn;
+    private boolean isDineIn;
 
     public Cart() {
         this.cartItems = new ArrayList<>();
+        this.isDineIn = true;
     }
 
     // Add menu items to the cart, correctly handling CartItem creation
@@ -35,6 +37,8 @@ public class Cart {
         if (cartItems.isEmpty()) {
             System.out.println("Your cart is empty.");
         } else {
+        	String diningOption = this.isDineIn ? "Dine-in" : "Takeaway";
+        	System.out.println("\nDining Option: " + diningOption);
             System.out.println("\nCart Items:");
             for (CartItem item : cartItems) {
                 System.out.println(item.getMenuItem().getItemName() + " - Quantity: " + item.getQuantity() + ", Subtotal: $" + item.getSubtotal());
@@ -52,10 +56,83 @@ public class Cart {
     }
 
     // Checkout method, simplified to just clear the cart and increment cartID
-    public void checkout() {
-        System.out.println("Checkout completed. Total cost: $" + totalCost());
-        clearCart(); // Clear cart after checkout
-        cartID++;
+//    public void checkout(OrderStatus orderStatus) {
+//    	PaymentManagement paymentMethods = new PaymentManagement();
+//    	List<String> methods = paymentMethods.getPaymentMethods();
+//    	if (this.cartItems.isEmpty()) {
+//    		System.out.println("Please select the item!!!");
+//    	} else {
+//    		this.displayCartItems();
+//        	Scanner scanner = new Scanner(System.in);
+//        	
+//        	while (true) {
+//        		System.out.println("\n--- Payment Option ---");
+//        		int index = 1;
+//    	        for (String method : methods) {
+//    	        	System.out.println((index++)+ ". " + method);
+//    	        }
+//    	        System.out.print("Select an option: ");
+//                int choice = scanner.nextInt();
+//                scanner.nextLine(); // Consume newline left-over
+//                
+//                if (choice >= 1 && choice <= methods.size()) {
+//                	String method = methods.get(choice - 1);
+//                	System.out.println("Your payment by " + method + " has been successfully processed.");
+//                	System.out.println(this.getCartID());
+//                	OrderItem order = new OrderItem(this.getCartID());
+//                	order.toString();
+//                	orderStatus.addNewOrders(order);
+//                	break;
+//                } else {
+//                	System.out.println("Invalid option. Please try again.");
+//                }
+//            } 
+////        	
+//            System.out.println("Checkout completed.");
+////          Print receipt.... (havent done)
+//            System.out.println("Your receipt: " + totalCost()); 
+//            clearCart(); // Clear cart after checkout
+//            cartID++;
+//    	}
+//    }
+    
+    public int checkout() {
+    	int orderID = cartID;
+    	PaymentManagement paymentMethods = new PaymentManagement();
+    	List<String> methods = paymentMethods.getPaymentMethods();
+    	if (this.cartItems.isEmpty()) {
+    		System.out.println("Please select the item!!!");
+    	} else {
+    		this.displayCartItems();
+        	Scanner scanner = new Scanner(System.in);
+        	
+        	while (true) {
+        		System.out.println("\n--- Payment Option ---");
+        		int index = 1;
+    	        for (String method : methods) {
+    	        	System.out.println((index++)+ ". " + method);
+    	        }
+    	        System.out.print("Select an option: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline left-over
+                
+                if (choice >= 1 && choice <= methods.size()) {
+                	String method = methods.get(choice - 1);
+                	System.out.println("Your payment by " + method + " has been successfully processed.");
+//                	System.out.println(this.getCartID());
+                	break;
+                } else {
+                	System.out.println("Invalid option. Please try again.");
+                }
+            } 
+//        	
+            System.out.println("Checkout completed.");
+//          Print receipt.... (havent done)
+            System.out.println("Your receipt: " + totalCost()); 
+            clearCart(); // Clear cart after checkout
+            cartID++;
+    	}
+    	return orderID;
     }
 
     // Method to clear the cart
@@ -70,12 +147,12 @@ public class Cart {
     }
 
     // Correct naming for checking if dine-in is selected
-    public boolean isDineIn() {
-        return dineIn;
+    public boolean getIsDineIn() {
+        return isDineIn;
     }
 
-    // Setter for dineIn
-    public void setDineIn(boolean dineIn) {
-        this.dineIn = dineIn;
+    // Setter for isDineIn
+    public void setIsDineIn(boolean isDineIn) {
+        this.isDineIn = isDineIn;
     }
 }

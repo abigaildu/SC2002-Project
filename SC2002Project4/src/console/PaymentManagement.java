@@ -72,4 +72,8 @@ public class PaymentManagement {
             }
         }
     }
+    
+    public List<String> getPaymentMethods() {
+    	return this.paymentMethods;
+    }
 }

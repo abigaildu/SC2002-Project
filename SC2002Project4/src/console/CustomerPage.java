@@ -1,5 +1,6 @@
 package console;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerPage {
@@ -8,25 +9,52 @@ public class CustomerPage {
     private Cart cart;
     private Scanner scanner;
     private BranchManagement branchManagement;
+    private OrderStatus orderStatus;
 
     public CustomerPage(MainFrame m, BranchManagement branchManagement) {
     	this.main = m;
         this.cart = new Cart();
         this.scanner = new Scanner(System.in);
         this.branchManagement = branchManagement;
+        this.orderStatus = new OrderStatus();
     }
 
     public void displayCustomerOptions() {
-        while (true) {
+    	int choice = 0;
+    	do {
+            System.out.println("\n--- Dining Option ---");
+            System.out.println("1. Dine-in");
+            System.out.println("2. Takeaway");
+            System.out.print("Select an option: ");
+
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline left-over
+
+            switch (choice) {
+                case 1:
+                	cart.setIsDineIn(true);
+                    break;
+                case 2:
+                	cart.setIsDineIn(false);
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        } while (choice != 1 && choice != 2);
+        
+    	while (true) {
             System.out.println("\n--- Customer Menu ---");
             System.out.println("1. Browse Menu");
             System.out.println("2. Add Item to Cart");
             System.out.println("3. View Cart");
             System.out.println("4. Checkout");
-            System.out.println("5. Exit");
+            System.out.println("5. Track Order");
+            System.out.println("6. Collect Order");
+            System.out.println("7. Exit");
             System.out.print("Select an option: ");
 
-            int choice = scanner.nextInt();
+            choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline left-over
 
             switch (choice) {
@@ -40,9 +68,27 @@ public class CustomerPage {
                     cart.displayCartItems();
                     break;
                 case 4:
-                    cart.checkout();
+                    int orderID = cart.checkout();
+//                    OrderItem order = new OrderItem(orderID);
+//                	order.toString();
+                	orderStatus.addNewOrders(orderID);
                     break;
                 case 5:
+                    orderStatus.displayOrderStatus();
+                    break;
+                case 6:
+                    orderStatus.displayReadyForPickupOrders();
+                    System.out.println("\nThe orders you want to collect: ");
+                    List<OrderItem> readyForPickupOrders = orderStatus.getReadyForPickupOrders();
+                    for (OrderItem readyOrder : readyForPickupOrders) {
+                    	System.out.println("OrderID " + readyOrder.getOrderID() + ": (Y/N)");
+                    	String isCollect = scanner.nextLine();
+                    	if (isCollect.equalsIgnoreCase("Y")) {
+                    		orderStatus.addCompletedOrders(readyOrder.getOrderID());
+                    	}
+                    }
+                    break;
+                case 7:
                 	this.main.run();
                     return;
                 default:

@@ -1,0 +1,3 @@
+chicken,spicy,10.0,true,FOOD
+fried rice,spicy,5.0,true,FOOD
+coke,zero,1.5,true,DRINK

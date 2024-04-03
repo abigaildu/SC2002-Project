@@ -1,0 +1,11 @@
+1,1,123,m,23,true
+2,2,123,m,23,true
+nicholas,nicholas,123,m,23,true
+3,123,123,m,23,false
+4,4,4,m,23,true
+5,5,123,m,23,false
+6,6,123,m,23,false
+7,7,123,m,23,false
+8,8,123,m,23,false
+9,9,123,m,23,false
+Louis,louis,123,M,23,false

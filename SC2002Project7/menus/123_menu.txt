@@ -1,0 +1,2 @@
+coke,diet,1.5,true,DRINK
+fried chicken,spicy chicken,6.0,true,FOOD

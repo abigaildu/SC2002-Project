@@ -1,0 +1,5 @@
+icecream,cold,0.8,true,DESSERT
+chickenburger,hot,4.5,true,FOOD
+sprite,cold,1.0,true,DRINK
+beefburger,hot,5.6,true,FOOD
+mountaindew,cold,1.0,true,DRINK

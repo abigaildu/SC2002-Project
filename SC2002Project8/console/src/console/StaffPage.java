@@ -107,7 +107,7 @@ public class StaffPage {
 //    	    // Proceed to show admin options only after successful login
 //    	    AdminPage adminPage = new AdminPage(staffManagement, main, branchManagement);
 //    	    adminPage.showAdminOptions();
-//    }
+//    } 
 
     private void loginProcess() {
         System.out.print("Enter ID (or type 'exit' to return): ");

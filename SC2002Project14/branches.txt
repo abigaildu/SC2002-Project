@@ -1,0 +1,2 @@
+123,mon,12,punggol
+456,Monday-Friday,8-22,Boonlay

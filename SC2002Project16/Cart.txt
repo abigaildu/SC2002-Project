@@ -1,0 +1,71 @@
+
+
+
+Cart ID :362
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+coke - Quantity: 1, Subtotal: $1.2
+
+Cart ID :597
+Dining Option : Dine-in
+Branch Name : 456
+Cart Items :
+icecream - Quantity: 1, Subtotal: $0.8
+
+Cart ID :874
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+coke - Quantity: 1, Subtotal: $1.2
+
+Cart ID :123
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+coke - Quantity: 1, Subtotal: $1.2
+
+Cart ID :863
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+coke - Quantity: 2, Subtotal: $2.4
+
+Cart ID :64
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+coke - Quantity: 1, Subtotal: $1.2
+
+Cart ID :962
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+chicken - Quantity: 1, Subtotal: $5.0
+burger - Quantity: 3, Subtotal: $6.0
+coke - Quantity: 3, Subtotal: $3.0
+
+Cart ID :707
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+chicken - Quantity: 1, Subtotal: $5.0
+
+Cart ID :492
+Dining Option : Dine-in
+Branch Name : 456
+Cart Items :
+icecream - Quantity: 1, Subtotal: $0.8
+
+Cart ID :196
+Dining Option : Dine-in
+Branch Name : 123
+Cart Items :
+coke - Quantity: 1, Subtotal: $1.0
+
+Cart ID :983
+Dining Option : Dine-in
+Branch Name : 456
+Cart Items :
+icecream - Quantity: 1, Subtotal: $0.8
+

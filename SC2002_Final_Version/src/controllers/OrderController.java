@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import models.OrderItem;
 import models.OrderItem.OrderStatus;
@@ -15,6 +16,16 @@ public class OrderController {
 		this.branchName = branchName;
 	}
 	
+	public int generateUniqueId() {
+		Random random = new Random();
+        int id;
+        
+        do {
+            id = random.nextInt(1000) + 1;
+        } while (getOrderItemById(id) != null);
+        return id;
+    }
+	
 	public OrderItem getOrderItemById(int id) {
 		
 	}
@@ -24,7 +35,7 @@ public class OrderController {
 	}
 	
 	public void addOrderItem(OrderItem orderItem) {
-		
+		this.orderId = generateUniqueId();
 	}
 	
 	public void updateOrderStatus(int id, OrderStatus status) {

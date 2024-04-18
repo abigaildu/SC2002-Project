@@ -1,8 +1,5 @@
 package console;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -64,7 +61,7 @@ public class Menu {
         }
     }
     
-    public MenuItem getMenuItemById(String itemName) {
+    public MenuItem getMenuItem(String itemName) {
         for (MenuItem item : menuItems) {
             if (item.getItemName().equalsIgnoreCase(itemName)) {
                 return item;

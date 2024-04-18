@@ -89,7 +89,7 @@ public class StaffManagement {
             System.out.println("No staff accounts available.");
         } else {
             System.out.println("Staff List:");
-            staffAccounts.forEach((id,staff) -> System.out.println("ID: " + id +  ", BranchName: " + staff.getBranchName() + ", Age: " + staff.getAge() + ", Gender: " + staff.getGender() + ", BranchManager: " + staff.isBranchManager()));
+            staffAccounts.forEach((id,staff) -> System.out.println("ID: " + id +  ", BranchName: " + staff.getBranchName() + ", Age: " + staff.getAge() + ", Gender: " + staff.getGender() + ", BranchManager: " + staff.getIsBranchManager()));
         }
     }
 
@@ -104,7 +104,7 @@ public class StaffManagement {
         Staff staff = staffAccounts.get(id);
         if (staff != null && staff.getpassword().equals(password)) {
             // Assuming StaffMember class has a getRole() method
-        	if(staff.isBranchManager() == true) {
+        	if(staff.getIsBranchManager() == true) {
         		return "MANAGER"; // Returns "MANAGER" or "STAFF"
         	}
         	else {
@@ -127,7 +127,7 @@ public class StaffManagement {
             for (Map.Entry<String, Staff> entry : staffAccounts.entrySet()) {
                 Staff staff = entry.getValue();
                 // Assuming you're storing passwords externally, you might need to adjust how you handle them.
-                String line = entry.getKey() + "," + staff.getpassword() + "," + staff.getBranchName() + "," + staff.getGender() + "," + staff.getAge() + "," + staff.isBranchManager();
+                String line = entry.getKey() + "," + staff.getpassword() + "," + staff.getBranchName() + "," + staff.getGender() + "," + staff.getAge() + "," + staff.getIsBranchManager();
                 out.println(line);
             }
         } catch (IOException e) {
@@ -178,7 +178,7 @@ public class StaffManagement {
 //        System.out.println("Staff member " + staffId + " promoted to manager with access to the branch-specific menu.");
 //
 //        return true;
-        if (staff != null && staff.isBranchManager() == false) {
+        if (staff != null && staff.getIsBranchManager() == false) {
             // Directly update the isBranchManager flag without checking for instanceof Manager
             staff.setBranchManager(true);
             
@@ -191,7 +191,7 @@ public class StaffManagement {
 
     public boolean demoteToStaff(String id) {
         Staff staff = getStaff(id);
-        if (staff != null && staff.isBranchManager()) {
+        if (staff != null && staff.getIsBranchManager()) {
             // Directly update the isBranchManager flag without checking for instanceof Manager
             staff.setBranchManager(false);
             
@@ -243,7 +243,7 @@ public class StaffManagement {
         // Iterate through staffAccounts, count how many managers are in the specified branch
         int managerCount = 0;
         for (Staff staff : staffAccounts.values()) {
-            if (staff.getBranchName().equals(branchName) && staff.isBranchManager()) {
+            if (staff.getBranchName().equals(branchName) && staff.getIsBranchManager()) {
                 managerCount++;
             }
         }
@@ -260,7 +260,7 @@ public class StaffManagement {
     
     private void promoteStaffToManagers(String branchName, int numberToPromote) {
         for (Staff staff : staffAccounts.values()) {
-            if (!staff.isBranchManager() && staff.getBranchName().equals(branchName) && numberToPromote > 0) {
+            if (!staff.getIsBranchManager() && staff.getBranchName().equals(branchName) && numberToPromote > 0) {
                 staff.setBranchManager(true);
                 numberToPromote--;
                 System.out.println("Promoted " + staff.getid() + " to manager in branch: " + branchName);
@@ -272,7 +272,7 @@ public class StaffManagement {
 
     private void demoteManagersToStaff(String branchName, int numberToDemote) {
         for (Staff staff : staffAccounts.values()) {
-            if (staff.isBranchManager() && staff.getBranchName().equals(branchName) && numberToDemote > 0) {
+            if (staff.getIsBranchManager() && staff.getBranchName().equals(branchName) && numberToDemote > 0) {
                 staff.setBranchManager(false);
                 numberToDemote--;
                 System.out.println("Demoted " + staff.getid() + " to staff in branch: " + branchName);
@@ -307,7 +307,7 @@ public class StaffManagement {
         }
 
         // Example of a permission check before allowing the status change
-        if (staff instanceof Manager || (staff.isBranchManager())) {
+        if (staff instanceof Manager || (staff.getIsBranchManager())) {
             //boolean success = orderStatus.markOrderAsReadyToCollect(orderID);
         	orderStatus.markOrderAsReadyToCollect(orderID);
             //if (success) {
@@ -330,7 +330,37 @@ public class StaffManagement {
             System.out.println("Staff ID not found.");
         }
     }
-    public List<Staff> getStaffListForBranch(String branchName) {
+    public List<Staff> getStaffListByBranch(String branchName) {
+        List<Staff> staffListByBranch = new ArrayList<>();
+        for (Staff staff : staffAccounts.values()) {
+            if (staff.getBranchName().equals(branchName)) {
+                staffListByBranch.add(staff);
+            }
+        }
+        return staffListByBranch;
+    }
+//    havent changed
+    public List<Staff> getStaffListByRole(String branchName) {
+        List<Staff> staffListForBranch = new ArrayList<>();
+        for (Staff staff : staffAccounts.values()) {
+            if (staff.getBranchName().equals(branchName)) {
+                staffListForBranch.add(staff);
+            }
+        }
+        return staffListForBranch;
+    }
+    
+    public List<Staff> getStaffListByGender(String branchName) {
+        List<Staff> staffListForBranch = new ArrayList<>();
+        for (Staff staff : staffAccounts.values()) {
+            if (staff.getBranchName().equals(branchName)) {
+                staffListForBranch.add(staff);
+            }
+        }
+        return staffListForBranch;
+    }
+    
+    public List<Staff> getStaffListByAgeRange(int startingRange, endingRange) {
         List<Staff> staffListForBranch = new ArrayList<>();
         for (Staff staff : staffAccounts.values()) {
             if (staff.getBranchName().equals(branchName)) {

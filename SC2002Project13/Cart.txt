@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cart ID: 107
+Dining Option: Dine-in
+Cart Items:
+coke - Quantity: 1, Subtotal: $1.2
+
+Cart ID: 293
+Dining Option: Dine-in
+Cart Items:
+coke - Quantity: 1, Subtotal: $1.2
+

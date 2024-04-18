@@ -212,77 +212,7 @@ public class BranchManagement {
     public void setStaffManagement(StaffManagement staffManagement) {
         this.staffManagement = staffManagement;
     }
-    
-//    public List<Branch> getOpenBranches() {
-//        //return new ArrayList<>(openBranches); // Return a copy to prevent external modifications
-//    	List<Branch> openBranches = new ArrayList<>();
-//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                String[] branchDetails = line.split(",");
-//                // Assuming the file structure is: id, name, isOpen (where isOpen is either "true" or "false")
-//                if (branchDetails.length == 3 && branchDetails[2].trim().equalsIgnoreCase("true")) {
-//                    Branch branch = new Branch(branchDetails[0].trim(), branchDetails[1].trim(), true);
-//                    openBranches.add(branch);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return openBranches;
-//    }
-    
-//    public Branch getBranchByName(String branchName) {
-//        for (Branch branch : openBranches) {
-//            if (branch.getName().equals(branchName)) {
-//                return branch;
-//            }
-//        }
-//        return null; // Or handle this case as you see fit.
-//    }
-    
-//    public MenuBranch getMenuBranchByManagerId(String managerId) {
-//        for (Branch branch : openBranches) {
-//            if (branch instanceof MenuBranch) { //&& ((MenuBranch)branch).getManagerId().equals(managerId)
-//                return (MenuBranch) branch;
-//            }
-//        }
-//        return null; // Manager ID not found or not managing a specific branch
-//    }
-    
-//    public Menu getOrCreateMenuForBranch(String branchName) {
-//        // Try to find the branch by name
-//        Branch branch = getBranchByName(branchName);
-//        
-//        // Check if the branch already exists and is a MenuBranch
-//        if (branch instanceof MenuBranch) {
-//            return ((MenuBranch) branch).getMenu();
-//        } else {
-//            // Branch exists but is not a MenuBranch, or branch doesn't exist
-//            Menu newMenu = new Menu();
-//            
-//            if (branch == null) {
-//                // Branch doesn't exist, so create a new MenuBranch
-//                branch = new MenuBranch(branchName, "defaultDays", "defaultHours", "defaultLocation");
-//                openBranches.add(branch); // Assuming this is the list of all branches
-//            }
-//            
-//            // If the found branch is not a MenuBranch, it needs conversion or handling.
-//            // However, simple conversion might not be straightforward due to potential data loss.
-//            // Thus, creating a new MenuBranch might be the safer route, or rethinking the design to avoid such a scenario.
-//            
-//            // For now, let's assume we're setting the menu to the newly created one.
-//            if(branch instanceof MenuBranch) {
-//                ((MenuBranch) branch).setMenu(newMenu);
-//            } else {
-//                // If branch is not an instance of MenuBranch, handle this scenario.
-//                // This might involve creating a new MenuBranch instance or reconsidering how branches are structured.
-//                System.out.println("Existing branch found but it's not a MenuBranch. Needs handling.");
-//            }
-//            
-//            return newMenu;
-//        }
-//    }
+ 
     
     public Menu getOrCreateMenuForBranch(String branchName) {
         // Path for the menu file, unique for each branch
@@ -304,15 +234,6 @@ public class BranchManagement {
     }
 
 
-
-//    public Branch getBranchByName(String branchName) {
-//        for (Branch branch : openBranches) {
-//            if (branch.getName().equals(branchName)) {
-//                return branch;
-//            }
-//        }
-//        return null; // Or handle this case as you see fit.
-//    }
     public Branch getBranchByName(String branchName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -338,7 +259,86 @@ public class BranchManagement {
         }
     }
 
+
+//  public Branch getBranchByName(String branchName) {
+//  for (Branch branch : openBranches) {
+//      if (branch.getName().equals(branchName)) {
+//          return branch;
+//      }
+//  }
+//  return null; // Or handle this case as you see fit.
+//}
     
+//  public List<Branch> getOpenBranches() {
+//      //return new ArrayList<>(openBranches); // Return a copy to prevent external modifications
+//  	List<Branch> openBranches = new ArrayList<>();
+//      try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//          String line;
+//          while ((line = br.readLine()) != null) {
+//              String[] branchDetails = line.split(",");
+//              // Assuming the file structure is: id, name, isOpen (where isOpen is either "true" or "false")
+//              if (branchDetails.length == 3 && branchDetails[2].trim().equalsIgnoreCase("true")) {
+//                  Branch branch = new Branch(branchDetails[0].trim(), branchDetails[1].trim(), true);
+//                  openBranches.add(branch);
+//              }
+//          }
+//      } catch (Exception e) {
+//          e.printStackTrace();
+//      }
+//      return openBranches;
+//  }
+  
+//  public Branch getBranchByName(String branchName) {
+//      for (Branch branch : openBranches) {
+//          if (branch.getName().equals(branchName)) {
+//              return branch;
+//          }
+//      }
+//      return null; // Or handle this case as you see fit.
+//  }
+  
+//  public MenuBranch getMenuBranchByManagerId(String managerId) {
+//      for (Branch branch : openBranches) {
+//          if (branch instanceof MenuBranch) { //&& ((MenuBranch)branch).getManagerId().equals(managerId)
+//              return (MenuBranch) branch;
+//          }
+//      }
+//      return null; // Manager ID not found or not managing a specific branch
+//  }
+  
+//  public Menu getOrCreateMenuForBranch(String branchName) {
+//      // Try to find the branch by name
+//      Branch branch = getBranchByName(branchName);
+//      
+//      // Check if the branch already exists and is a MenuBranch
+//      if (branch instanceof MenuBranch) {
+//          return ((MenuBranch) branch).getMenu();
+//      } else {
+//          // Branch exists but is not a MenuBranch, or branch doesn't exist
+//          Menu newMenu = new Menu();
+//          
+//          if (branch == null) {
+//              // Branch doesn't exist, so create a new MenuBranch
+//              branch = new MenuBranch(branchName, "defaultDays", "defaultHours", "defaultLocation");
+//              openBranches.add(branch); // Assuming this is the list of all branches
+//          }
+//          
+//          // If the found branch is not a MenuBranch, it needs conversion or handling.
+//          // However, simple conversion might not be straightforward due to potential data loss.
+//          // Thus, creating a new MenuBranch might be the safer route, or rethinking the design to avoid such a scenario.
+//          
+//          // For now, let's assume we're setting the menu to the newly created one.
+//          if(branch instanceof MenuBranch) {
+//              ((MenuBranch) branch).setMenu(newMenu);
+//          } else {
+//              // If branch is not an instance of MenuBranch, handle this scenario.
+//              // This might involve creating a new MenuBranch instance or reconsidering how branches are structured.
+//              System.out.println("Existing branch found but it's not a MenuBranch. Needs handling.");
+//          }
+//          
+//          return newMenu;
+//      }
+//  }
 
 
 

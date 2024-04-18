@@ -4,26 +4,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CustomerPage {
+	private Scanner scanner;
 	private MainFrame main;
     private Menu menu;
     private Cart cart;
-    private Scanner scanner;
     private BranchManagement branchManagement;
     private OrderStatus orderStatus;
     private OrderManagement orderManagement;
 
     public CustomerPage(MainFrame m, BranchManagement branchManagement, OrderStatus orderStatus, OrderManagement orderManagement) {
+    	this.scanner = new Scanner(System.in);
     	this.main = m;
         //this.cart = new Cart(orderId);
     	this.cart = new Cart(generateCartId());
-        this.scanner = new Scanner(System.in);
         this.branchManagement = branchManagement;
         this.orderStatus = orderStatus;
         this.orderManagement = orderManagement;
     }
 
     public void displayCustomerOptions() {
-    	int choice = 0;
+    	int choice;
     	do {
             System.out.println("\n--- Dining Option ---");
             System.out.println("1. Dine-in");

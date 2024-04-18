@@ -151,7 +151,7 @@ public class StaffPage {
     
     private void redirectManagerToPage(String managerId) {
         Staff manager = staffManagement.getStaff(managerId);
-        if (manager != null && manager.isBranchManager()) {
+        if (manager != null && manager.getIsBranchManager()) {
             String branchName = manager.getBranchName();
             Menu menu = branchManagement.getOrCreateMenuForBranch(branchName);
             ManagerPage managerPage = new ManagerPage(menu, branchName, staffManagement, orderStatus, orderManagement);

@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class MainFrame {
     private CustomerPage customerPage;
     private StaffPage staffPage;
-    private Scanner scanner;
     private BranchManagement branchManagement;
     private StaffManagement staffManagement;
     private OrderStatus orderStatus;
@@ -12,32 +11,28 @@ public class MainFrame {
     private StaffMenu staffMenu;
     
     public MainFrame() {
-        this.scanner = new Scanner(System.in);
+        this.customerPage = new CustomerPage(this, branchManagement, orderStatus, orderManagement);
+        this.staffPage = new StaffPage(this, staffManagement, staffMenu ,orderStatus);  
+        this.branchManagement = new BranchManagement(staffManagement);
+        this.staffManagement = new StaffManagement(branchManagement);
         this.orderStatus = new OrderStatus();
         this.orderManagement = new OrderManagement();
-        this.staffManagement = new StaffManagement(branchManagement);
-        this.branchManagement = new BranchManagement(staffManagement);
-        this.customerPage = new CustomerPage(this,branchManagement, orderStatus, orderManagement);
         this.staffMenu = new StaffMenu(staffManagement, orderStatus, orderManagement);
-        this.staffPage = new StaffPage(this, staffManagement, staffMenu ,orderStatus);
-        
-        
-        
     }
 
     void run() {
-        boolean running = true;
+    	Scanner scanner = new Scanner(System.in);
+    	int roleChoice;
+    	do {
+    		System.out.println("Welcome to the Fastfood ordering and management System (FOMS)!");
 
-        while (running) {
-            System.out.println("Welcome to the Fast Food Management System");
-
-            System.out.println("\nAre you a:");
+            System.out.println("\nYou are a:");
             System.out.println("1. Customer");
             System.out.println("2. Staff");
             System.out.println("3. Exit");  // Added exit option here
             System.out.print("Your choice: ");
 
-            int roleChoice = scanner.nextInt();
+            roleChoice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             switch (roleChoice) {
@@ -51,23 +46,15 @@ public class MainFrame {
                     staffPage.showLoginOptions();
                     break;
                 case 3:
-                    // Exit the program
-                    running = false; // Set running to false to exit the while loop and end the program
                     System.out.println("Exiting the program. Thank you!");
                     scanner.close();
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
-                    running = false;
+                    System.out.println("Invalid option. Please try again.\n");
                     break;
             }
-
-            // Add a condition to break out of the while loop if the program should exit
-            if (!running) {
-                break;
-            }
-        }
+    	} while (roleChoice != 3);
     }
     
     public static void main(String[] args) {

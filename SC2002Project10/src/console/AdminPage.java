@@ -171,6 +171,7 @@ public class AdminPage {
     }
 
     private void displayStaffList() {
+    	
         staffManagement.displayStaffList();
     }
     

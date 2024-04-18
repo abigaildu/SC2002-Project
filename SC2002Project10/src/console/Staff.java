@@ -3,19 +3,19 @@ package console;
 public class Staff {
 	private String id;
 	private String password;
-    private String branchName;
+    private Branch branch;
     private char gender;
     private int age;
-    private boolean branchManager;
+    private boolean isBranchManager;
     
     // Constructor
-    public Staff(String id, String password, String branchName, char gender, int age, boolean branchManager) {
+    public Staff(String id, String password, Branch branch, char gender, int age, boolean isBranchManager) {
         this.id = id;
         this.password = password;
-        this.branchName = branchName;
+        this.branch = branch;
         this.gender = gender;
         this.age = age;
-        this.branchManager = branchManager;
+        this.isBranchManager = isBranchManager;
     }
 
     // Getters and setters
@@ -36,12 +36,12 @@ public class Staff {
         this.password = password;
     }
 
-    public String getBranchName() {
-        return branchName;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void changeBranch(Branch newBranch) {
+        this.branch = newBranch;
     }
 
     public char getGender() {
@@ -59,12 +59,28 @@ public class Staff {
     public void setAge(int age) {
         this.age = age;
     }
-    public boolean isBranchManager() {
-        return branchManager;
+    public boolean getIsBranchManager() {
+        return isBranchManager;
     }
 
-    public void setBranchManager(boolean branchManager) {
-        this.branchManager = branchManager;
+    public void setBranchManager(boolean isBranchManager) {
+        this.isBranchManager = isBranchManager;
+    }
+//    need to complete
+    public void displayNewOrders() {
+    	branch.
+    }
+    
+    public void viewOrderById(String id) {
+    	
+    }
+    
+    public void selectOrderToProcess() {
+    	
+    }
+    
+    public void updateCompletedOrder() {
+    	
     }
 
 

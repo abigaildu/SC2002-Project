@@ -5,27 +5,31 @@ public class MenuItem {
 	public enum Category {
 	    FOOD,
 	    DRINK,
-	    DESSERT
+	    DESSERT,
+	    OTHER
 	}
 	
     private String itemName;
     private String itemDesc;
     private float price;
-    private boolean avail;
+    private boolean isAvail;
     private Category category; // Category of the menu item
 
     // Constructor
-    public MenuItem(String itemName, String itemDesc, float price, boolean avail, Category category) {
+    public MenuItem(String itemName, float price) {
+        this.itemName = itemName;
+        this.itemDesc = "";
+        this.price = price;
+        this.isAvail = true;
+        this.category = Category.OTHER;
+    }
+    
+    public MenuItem(String itemName, String itemDesc, float price, boolean isAvail, Category category) {
         this.itemName = itemName;
         this.itemDesc = itemDesc;
         this.price = price;
-        this.avail = avail;
+        this.isAvail = isAvail;
         this.category = category;
-    }
-    
-    public MenuItem(String itemName, float price) {
-        this.itemName = itemName;
-        this.price = price;
     }
 
     // Getters and Setters
@@ -54,11 +58,11 @@ public class MenuItem {
     }
 
     public boolean isAvailable() {
-        return avail;
+        return isAvail;
     }
 
-    public void setAvailability(boolean avail) {
-        this.avail = avail;
+    public void setAvailability(boolean isAvail) {
+        this.isAvail = isAvail;
     }
 
     public Category getCategory() {
@@ -72,7 +76,7 @@ public class MenuItem {
     @Override
     public String toString() {
         // Create a string representation of the MenuItem
-        return itemName + "," + itemDesc + "," + price + "," + avail + "," + category.name();
+        return itemName + "," + itemDesc + "," + price + "," + isAvail + "," + category.name();
     }
 
     public static MenuItem fromString(String line) {
@@ -81,10 +85,10 @@ public class MenuItem {
             String itemName = parts[0];
             String itemDesc = parts[1];
             float price = Float.parseFloat(parts[2]);
-            boolean avail = Boolean.parseBoolean(parts[3]);
+            boolean isAvail = Boolean.parseBoolean(parts[3]);
             Category category = Category.valueOf(parts[4]);
 
-            return new MenuItem(itemName, itemDesc, price, avail, category);
+            return new MenuItem(itemName, itemDesc, price, isAvail, category);
         } catch (Exception e) {
             System.out.println("Error parsing menu item from string: " + e.getMessage());
             return null;

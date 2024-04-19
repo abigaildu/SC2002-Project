@@ -4,12 +4,12 @@ public class Staff {
 	private String id;
 	private String password;
 	private String name;
-    private char gender;
-    private char role;
+    private String gender;
+    private String role;
     private int age;
 	private String branchName;
 	
-	public Staff(String id, String name, char gender, char role, int age, String branchName) {
+	public Staff(String id, String name, String gender, String role, int age, String branchName) {
 		super();
 		this.id = id;
 		this.password = "password";
@@ -20,7 +20,7 @@ public class Staff {
 		this.branchName = branchName;
 	}
 	
-	public Staff(String id, String password, String name, char gender, char role, int age, String branchName) {
+	public Staff(String id, String password, String name, String gender, String role, int age, String branchName) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -51,19 +51,19 @@ public class Staff {
 		this.name = name;
 	}
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public char getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(char role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

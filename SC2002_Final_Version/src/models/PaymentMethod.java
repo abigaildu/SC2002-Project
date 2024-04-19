@@ -4,7 +4,6 @@ public class PaymentMethod {
 	private String name;
 
 	public PaymentMethod(String name) {
-		super();
 		this.name = name;
 	}
 

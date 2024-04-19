@@ -27,7 +27,7 @@ public class MainView {
 
             System.out.println("\nYou are a:");
             System.out.println("1. Customer");
-            System.out.println("2. Staff");
+            System.out.println("2. Personnel");
             System.out.println("3. Exit");
             System.out.print("Your choice: ");
 
@@ -36,6 +36,7 @@ public class MainView {
 
             switch (roleChoice) {
                 case 1:
+                	customerView.
                 	customerPage.selectBranchAndDisplayMenu();
                     break;
                 case 2:

@@ -101,7 +101,7 @@ public class DataController {
 			openFileToRead(fileName);
 			staffAccounts = (List<Staff>) ois.readObject();
         } catch (IOException e) {
-            System.err.println("An error occurred while saving staff accounts to file: " + e.getMessage());
+            System.err.println("An error occurred while reading staff accounts from file: " + e.getMessage());
         } finally {
         	closeFileAfterRead();
         	return staffAccounts;
@@ -126,7 +126,7 @@ public class DataController {
 			openFileToRead(fileName);
 			menu = (List<MenuItem>) ois.readObject();
         } catch (IOException e) {
-            System.err.println("An error occurred while saving menu item to file: " + e.getMessage());
+            System.err.println("An error occurred while reading menu from file: " + e.getMessage());
         } finally {
         	closeFileAfterRead();
         	return menu;
@@ -151,7 +151,7 @@ public class DataController {
 			openFileToRead(fileName);
 			paymentMethods = (List<PaymentMethod>) ois.readObject();
         } catch (IOException e) {
-            System.err.println("An error occurred while saving payment methods to file: " + e.getMessage());
+            System.err.println("An error occurred while reading payment methods from file: " + e.getMessage());
         } finally {
         	closeFileAfterRead();
         	return paymentMethods;
@@ -176,7 +176,7 @@ public class DataController {
 			openFileToRead(fileName);
 			branchList = (List<Branch>) ois.readObject();
         } catch (IOException e) {
-            System.err.println("An error occurred while saving branch list to file: " + e.getMessage());
+            System.err.println("An error occurred while reading branch list from file: " + e.getMessage());
         } finally {
         	closeFileAfterRead();
         	return branchList;
@@ -201,10 +201,35 @@ public class DataController {
 			openFileToRead(fileName);
 			orders = (List<Order>) ois.readObject();
         } catch (IOException e) {
-            System.err.println("An error occurred while saving orders to file: " + e.getMessage());
+            System.err.println("An error occurred while reading orders from file: " + e.getMessage());
         } finally {
         	closeFileAfterRead();
         	return orders;
+        }
+	}
+	
+	public static void writePendingRequestsToFile(List<String> requests, String fileName) {
+        try {
+            openFileToWrite(fileName);
+            oos.writeObject(requests);
+        } catch (IOException e) {
+            System.err.println("An error occurred while saving pending requests to file: " + e.getMessage());
+        } finally {
+        	closeFileAfterWrite();
+        }
+	}
+	
+	@SuppressWarnings("finally")
+	public static List<String> readPendingRequestsFromFile(String fileName) {
+		List<String> requests = null;
+		try {
+			openFileToRead(fileName);
+			requests = (List<String>) ois.readObject();
+        } catch (IOException e) {
+            System.err.println("An error occurred while reading pending requests from file: " + e.getMessage());
+        } finally {
+        	closeFileAfterRead();
+        	return requests;
         }
 	}
 }

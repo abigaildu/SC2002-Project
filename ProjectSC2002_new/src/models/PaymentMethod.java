@@ -1,5 +1,9 @@
 package models;
 
+import java.util.List;
+
+import controllers.CartController;
+import controllers.OrderControllerCustomer;
 import models.Order.OrderStatus;
 
 public class PaymentMethod {
@@ -10,16 +14,14 @@ public class PaymentMethod {
 		
 	}
 	
-	public boolean run(int orderID, OrderList orderList) {
-		Order order = orderList.getOrder(orderID);
-		if(order != null) {
-			float payable = order.getCart().totalCost();
-			System.out.println("Payable amount: $"+ payable);
-			orderList.editOrder(orderID, 0, OrderStatus.COMPLETED);
-			System.out.println("Payment is successful. Thank you!");
-			return true;
-		}
-		return false;
+	public boolean run(CartController cart, OrderControllerCustomer orderControllerCustomer) {
+		int orderId = orderControllerCustomer.generateUniqueId();
+		Order order = new Order(cart, orderId);
+		float payable = order.getCart().totalCost();
+		System.out.println("Payable amount: $"+ payable);
+		orderControllerCustomer.addOrder(order);
+		System.out.println("Payment is successful. Thank you!");
+		return true;
 	}
 	
 	public String getName() {

@@ -45,5 +45,7 @@ public class MenuControllerCustomer {
 		return menuItems;
 	}
 	
-	
+	public String getBranchName() {
+		return branchName;
+	}
 }

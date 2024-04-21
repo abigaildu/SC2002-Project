@@ -1,8 +1,14 @@
 package controllers;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import models.Staff;
 
 public class StaffControllerAdmin extends StaffController {
+	private final String pendingRequestsFileName = "pending_requests.txt";
+	private List<String> pendingRequests = DataController.readPendingRequestsFromFile(pendingRequestsFileName);
+	
 	public StaffControllerAdmin() {
 		super();
 	}
@@ -78,5 +84,19 @@ public class StaffControllerAdmin extends StaffController {
 			return true; //staff demoted successfully
 		}
 		return false; //staff not found
+    }
+    
+    private void addPendingRequest(String req) {
+    	pendingRequests.add(req);
+    	DataController.writePendingRequestsToFile(pendingRequests, pendingRequestsFileName);
+    }
+    
+    private List<String> getPendingRequest() {
+//    	branchName, promote, staffID
+//    	branchName, demote, staffID
+//    	branchName, add, staffID
+//    	branchName, remove, staffID
+//    	branchName, transfer, staffID, newBranchName
+    	return pendingRequests;
     }
 }

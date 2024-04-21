@@ -2,6 +2,8 @@ package models;
 
 import java.util.Scanner;
 
+import controllers.CartController;
+import controllers.OrderControllerCustomer;
 import models.Order.OrderStatus;
 
 public class DebitCredit extends PaymentMethod{
@@ -12,21 +14,19 @@ public class DebitCredit extends PaymentMethod{
 	}
 	
 	/*@Override*/
-	public boolean run(int orderID, OrderList orderList) {
-		Order order = orderList.getOrder(orderID);
-		if(order != null) {
-			float payable = order.getCart().totalCost();
-			System.out.println("Payable amount by credit/debit card: $"+ payable);
-			System.out.print("Card number: ");
-			scan.nextLong();
-			scan.nextLine();
-			System.out.println("CVC: ");
-			scan.nextInt();
-			scan.nextLine();
-			orderList.editOrder(orderID, 0, OrderStatus.COMPLETED);
-			System.out.println("Payment is successful. Thank you!");
-			return true;
-		}
-		return false; //order not found
+	public boolean run(CartController cart, OrderControllerCustomer orderControllerCustomer) {
+		int orderId = orderControllerCustomer.generateUniqueId();
+		Order order = new Order(cart, orderId);
+		float payable = order.getCart().totalCost();
+		System.out.println("Payable amount by credit/debit card: $"+ payable);
+		System.out.print("Card number: ");
+		scan.nextLong();
+		scan.nextLine();
+		System.out.println("CVC: ");
+		scan.nextInt();
+		scan.nextLine();
+		orderControllerCustomer.addOrder(order);
+		System.out.println("Payment is successful. Thank you!");
+		return true;
 	}
 }

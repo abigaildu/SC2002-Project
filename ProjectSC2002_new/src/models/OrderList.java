@@ -21,6 +21,20 @@ public class OrderList {
 	public String getOrdersFileNameForBranch(String branchName) {
 		return "orders/" + branchName.replace(" ", "_") + "_orders.txt"; 
 	}
-	
-	
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
 }

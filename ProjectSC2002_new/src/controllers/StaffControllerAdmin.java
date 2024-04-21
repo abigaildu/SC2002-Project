@@ -49,6 +49,15 @@ public class StaffControllerAdmin extends StaffController {
 		return false; //staff not found
 	}
 	
+	public void deleteStaffByBranchName(String branchName) {
+		for (Staff staff : staffList) {
+			if (staff.getBranchName().equalsIgnoreCase(branchName.trim())) {
+				staffList.remove(staff);
+			}
+		}
+		DataController.writeStaffAccountsToFile(super.staffList, super.fileName);
+	}
+	
 	public boolean transferStaff (String id, String newBranchName) {
     	Staff staff = super.getStaffById(id);
 		if(staff != null) {	

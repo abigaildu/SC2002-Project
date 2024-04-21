@@ -50,9 +50,15 @@ public class BranchController {
 	}
 	
 	//delete
-	public boolean deleteBranch(String branchToRemove) {
+	public boolean deleteBranch(String branchToRemove, StaffControllerAdmin staffControllerAdmin) {
 		Branch branch = this.getBranchByName(branchToRemove);
 		if(branch != null) {
+//			delete staffs, menu, orders in branch
+			staffControllerAdmin.deleteStaffByBranchName(branchToRemove);
+			OrderControllerStaff orderControllerStaff = new OrderControllerStaff(branchToRemove);
+			orderControllerStaff.clearOrders();
+			MenuControllerManager menuControllerManager = new MenuControllerManager(branchToRemove);
+			menuControllerManager.clearMenuItems();
 			branchList.remove(branch);
 			DataController.writeBranchListToFile(branchList, fileName);
 			return true; //branch removed successfully

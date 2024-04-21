@@ -23,6 +23,10 @@ public class OrderControllerStaff extends OrderControllerCustomer {
 		return orders;
 	}
 	
+	public void clearOrders() {
+		orders.clear();
+	}
+	
 	public boolean changeOrderStatusToReady (int id) {
 		Order order = this.getOrderById(id);
 		if(order != null) {

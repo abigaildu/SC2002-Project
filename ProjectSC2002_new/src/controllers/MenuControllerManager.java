@@ -42,4 +42,8 @@ public class MenuControllerManager extends MenuControllerCustomer {
 		}
     	return false; //menu item not found
     }
+    
+    public void clearMenuItems() {
+    	menuItems.clear();
+    }
 }

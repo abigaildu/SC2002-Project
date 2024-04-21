@@ -25,7 +25,7 @@ public class StaffController {
     }
     
     
-    public List<Staff> getSt;affsByRole(String role) {
+    public List<Staff> getStaffsByRole(String role) {
     	
     }
     

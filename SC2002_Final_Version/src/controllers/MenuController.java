@@ -42,25 +42,4 @@ public class MenuController {
 	public void deleteMenuItem(String name) {
 		
 	}
-	
-	
-	
-	
-	
-
-	public void updateNumberOfPersonnels(char role) {
-		
-	}
-	
-	public void openBranch(Branch branch) {
-		
-	}
-	
-	public void closeBranch(String branchName) {
-		
-	}
-	
-	public void updateBranch(String branchName, String location) {
-		
-	}
 }

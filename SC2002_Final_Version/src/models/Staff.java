@@ -9,6 +9,17 @@ public class Staff {
     private int age;
 	private String branchName;
 	
+	public Staff(String id, String name, String gender, String role, int age) {
+		super();
+		this.id = id;
+		this.password = "password";
+		this.name = name;
+		this.gender = gender;
+		this.role = role;
+		this.age = age;
+		this.branchName = "";
+	}
+	
 	public Staff(String id, String name, String gender, String role, int age, String branchName) {
 		super();
 		this.id = id;

@@ -1,0 +1,4 @@
+chicken,fried,5.0,true,FOOD
+chickenpie,hot,2.3,true,FOOD
+burger,hot,2.0,true,FOOD
+coke,cold,1.0,true,DRINK

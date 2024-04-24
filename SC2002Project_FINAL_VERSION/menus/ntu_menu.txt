@@ -1,0 +1,3 @@
+chicken,spicy,4.0,true,FOOD
+ice cream,chocolate,2.0,true,DESSERT
+french fries,seaweed shaker,3.0,true,FOOD

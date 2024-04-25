@@ -5,7 +5,7 @@ Representing a MenuItem.
 */
 public class MenuItem {
 	/**
-	 *  Category of this MenuItem
+	 *  Category of MenuItem
 	 */
 	public enum Category
 	{

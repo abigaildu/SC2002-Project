@@ -10,6 +10,9 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+Representing a BranchManagement.
+*/
 public class BranchManagement {
 	/**
 	* All branches.

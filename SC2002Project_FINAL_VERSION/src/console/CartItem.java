@@ -33,7 +33,7 @@ public class CartItem {
 
     /**
      * Changing the MenuItem of this CartItem.
-     * @param id This CartItem's new MenuItem.
+     * @param menuItem This CartItem's new MenuItem.
      */
     public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
@@ -49,7 +49,7 @@ public class CartItem {
 
     /**
      * Changing the quantity of this CartItem.
-     * @param id This CartItem's new quantity.
+     * @param quantity This CartItem's new quantity.
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;

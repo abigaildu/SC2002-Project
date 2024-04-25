@@ -36,7 +36,7 @@ public class Staff {
      * @param branchName This Staff's branch name.
      * @param gender This Staff's gender.
      * @param age This Staff's age.
-     * @param branchManager This Staff's possibility of being a branch manager.
+     * @param isBranchManager This Staff's possibility of being a branch manager.
      */
     public Staff(String id, String password, String branchName, char gender, int age, boolean isBranchManager) {
         this.id = id;

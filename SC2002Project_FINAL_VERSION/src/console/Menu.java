@@ -11,6 +11,9 @@ import java.util.*;
 
 import console.MenuItem.Category;
 
+/**
+Representing a Menu.
+*/
 public class Menu {
 	/**
 	* The menu item list.

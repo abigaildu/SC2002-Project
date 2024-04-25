@@ -17,12 +17,31 @@ import java.nio.file.Paths;
 Representing a Cart.
 */
 public class Cart {
+	/**
+	* The items of this Cart.
+	*/
     private List<CartItem> cartItems; // Correctly manage a list of CartItem objects
+    /**
+	* The id of this Cart.
+	*/
     private int cartID;
+    /**
+	* The dining option of this Cart.
+	*/
     private boolean isDineIn;
+    /**
+	* The file path of text file storing cart detail.
+	*/
     private static final String CART_DETAILS_FILE_PATH = "Cart.txt";
+    /**
+	* The file path of text file storing card details.
+	*/
     private final String CARD_DETAILS_FILE_PATH = "card_details_storage.txt";
     
+    /**
+     * Creating a new Cart with the given information.
+     * @param CartID Cart's id.
+     */
     public Cart(int CartID) {
         if (CartID <= 0) { // Check if a valid ID is passed
             // Assuming generateUniqueCartID() is a static method in CustomerPage
@@ -34,7 +53,11 @@ public class Cart {
         this.isDineIn = true;
     }
 
-    // Add menu items to the cart, correctly handling CartItem creation
+    /**
+     * Adding a new MenuItem into Cart.
+     * @param menuItem New MenuItem.
+     * @param quantity New quantity.
+     */
     public void addMenuItem(MenuItem menuItem, int quantity) {
         // Check if the item already exists in the cart
         boolean itemFound = false;
@@ -53,7 +76,9 @@ public class Cart {
         System.out.println("Added " + quantity + " x " + menuItem.getItemName() + " to the cart.");
     }
 
-    // Method to display all cart items with their quantities and subtotals
+    /**
+     * Displaying all cart items.
+     */
     public void displayCartItems() {
         if (cartItems.isEmpty()) {
             System.out.println("Your cart is empty.");
@@ -67,8 +92,11 @@ public class Cart {
         }
     }
 
-    // Method to calculate the total cost of items in the cart
-    public float totalCost() {
+    /**
+     * Calculating total cost of this Cart.
+     * @return Total cost of this Cart.
+     */
+    public float calculateTotalCost() {
         float total = 0;
         for (CartItem cartItem : cartItems) {
             total += cartItem.getSubtotal(); // Use getSubtotal() for each CartItem
@@ -76,6 +104,12 @@ public class Cart {
         return total;
     }
 
+    /**
+     * Saving card details to text file.
+     * @param cardNumber Card number.
+     * @param cvv CVV.
+     * @param branchName Branch name.
+     */
     private void saveCardDetailsFile(String cardNumber, String cvv, String branchName) {
         try {
             FileWriter writer = new FileWriter(CARD_DETAILS_FILE_PATH, true);
@@ -88,6 +122,10 @@ public class Cart {
         }
     }
     
+    /**
+     * Checking out.
+     * @param branchName Branch name.
+     */
     public void checkout(String branchName) {
         PaymentManagement paymentMethods = new PaymentManagement();
         List<String> methods = paymentMethods.getPaymentMethods();
@@ -109,7 +147,7 @@ public class Cart {
 
                 if (choice >= 1 && choice <= methods.size()) {
                     String selectedMethod = methods.get(choice - 1);
-                    boolean checkCardPayment = CheckCardPayment(selectedMethod, choice);
+                    boolean checkCardPayment = CheckCardPayment(choice);
                     if (checkCardPayment) {
                         System.out.print("Enter card number: ");
                         String cardNumber = scanner.nextLine();
@@ -121,11 +159,10 @@ public class Cart {
                     System.out.println("Your payment by " + selectedMethod + " has been successfully processed.");
                     System.out.println("Checkout completed.");
                     this.cartID = CustomerPage.generateUniqueCartID();
-                    System.out.println("Your receipt: $" + totalCost() + " for Cart ID " + getCartID());
+                    System.out.println("Your receipt: $" + calculateTotalCost() + " for Cart ID " + getCartID());
                     // Save cart details to file after successful payment
                     saveCartToFile(branchName);
                     clearCart();
-                    // this.cartID = generateUniqueCartID(); // Generate new cart ID for the next order
                     break;
                 } else {
                     System.out.println("Invalid option. Please try again.");
@@ -134,38 +171,58 @@ public class Cart {
         }
     }
 
-    
-
-
-
-    // Method to clear the cart
+    /**
+     * Clearing cart.
+     */
     public void clearCart() {
         cartItems.clear();
         System.out.println("The cart has been cleared.");
     }
 
-    // Getter for cartID
+    /**
+     * Getting the id of this Cart.
+     * @return This Cart's id.
+     */
     public int getCartID() {
         return cartID;
     }
     
+    /**
+     * Changing the id of this Cart.
+     * @param cartID This Cart's new id.
+     */
     public void setCartID(int cartID) {
     	this.cartID = cartID;
     }
 
-    // Correct naming for checking if dine-in is selected
+    /**
+     * Getting the dining option of this Cart.
+     * @return This Cart's dining option.
+     */
     public boolean getIsDineIn() {
         return isDineIn;
     }
 
-    // Setter for isDineIn
+    /**
+     * Changing the dining option of this Cart.
+     * @param isDineIn This Cart's new dining option.
+     */
     public void setIsDineIn(boolean isDineIn) {
         this.isDineIn = isDineIn;
     }
     
+    /**
+     * Getting all CartItems.
+     * @return All CartItems.
+     */
     public List<CartItem> getCartItems() {
         return this.cartItems;
     }
+    
+    /**
+     * Removing cart details.
+     * @param orderId Cart's orderId.
+     */
     public void removeCartDetails(int orderId) {
         try {
             // Read the existing cart details file
@@ -203,7 +260,13 @@ public class Cart {
             System.err.println("An error occurred while removing cart details: " + e.getMessage());
         }
     }
-    private boolean CheckCardPayment(String selectedMethod, int choice) {
+    
+    /**
+     * Checking card payment.
+     * @param choice Choice of payment method.
+     * @return True if it is Credit/Debit Card, otherwise False.
+     */
+    private boolean CheckCardPayment(int choice) {
         try (BufferedReader reader = new BufferedReader(new FileReader("payment_methods.txt"))) {
             String line;
             int index = 0;
@@ -220,10 +283,10 @@ public class Cart {
         return false; // Default to false if any error occurs
     }
 
-
-   
-
-    
+    /**
+     * Saving cart to text file.
+     * @param branchName Branch name.
+     */
     public void saveCartToFile(String branchName) {
         try (FileWriter writer = new FileWriter(CART_DETAILS_FILE_PATH, true)) { // Enable append mode by adding true
             // Write the cart ID and dining option at the beginning of the file
@@ -244,7 +307,11 @@ public class Cart {
     }
 
 
-    // Method to load the cart from a file
+    /**
+     * Loading cart from text file.
+     * @param cartID Cart's id.
+     * @return Cart.
+     */
     public static Cart loadCartFromFile(int cartID) {
         Cart cart = new Cart(cartID);
         try (BufferedReader reader = new BufferedReader(new FileReader(CART_DETAILS_FILE_PATH))) {

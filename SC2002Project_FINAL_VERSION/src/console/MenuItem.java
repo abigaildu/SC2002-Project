@@ -4,12 +4,27 @@ package console;
 Representing a MenuItem.
 */
 public class MenuItem {
-	public enum Category {
-	    FOOD,
-	    DRINK,
-	    DESSERT
+	/**
+	 *  Category of this MenuItem
+	 */
+	public enum Category
+	{
+	    /**
+	     * Food
+	     */
+		FOOD,
+
+	    /**
+	     * Drink
+	     */
+		DRINK,
+
+	    /**
+	     * Dessert
+	     */
+		DESSERT
+
 	}
-	
 	/**
 	* The name of this MenuItem.
 	*/

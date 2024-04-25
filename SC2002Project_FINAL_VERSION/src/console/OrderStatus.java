@@ -244,20 +244,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.*;
 
+/**
+Representing an OrderStatus.
+*/
 public class OrderStatus {
+	/**
+	* The orders.
+	*/
     private List<OrderItem> orders = new ArrayList<>();
+    /**
+	* The file path of text file storing staff accounts.
+	*/
     private static final String ORDER_DETAILS_FILE_PATH = "orders.txt";
+    /**
+	* The file path of text file storing staff accounts.
+	*/
     private static final String CANCELLED_DETAILS_FILE_PATH = "cancelled_orders.txt";
     private static final String COMPLETED_DETAILS_FILE_PATH = "completed_orders.txt";
-    private static final long TIMEOUT_DURATION = 30 * 1000;
-   
+    private static final long TIMEOUT_DURATION = 15 * 1000;
     private String staffBranch;
-   // private BranchManagement branchManagement;
+    
     public OrderStatus() {
-    	
     	loadOrderDetails(); // Load orders from file on initialization
-       
-         // Load orders from file on initialization
         
     }
     private void logCancelledOrder(OrderItem cancelledOrder) {
@@ -307,14 +315,6 @@ public class OrderStatus {
         }
         System.out.println("Order ID " + orderID + " not found.");
     }
-
-//    public void displayOrdersByStatus(OrderItem.Status status) {
-//        for (OrderItem order : orders) {
-//            if (order.getOrderStatus() == status) {
-//                System.out.println(order);
-//            }
-//        }
-//    }
     
     public void displayNewOrders() {
         //System.out.println(staffBranch);
@@ -390,18 +390,6 @@ public class OrderStatus {
             System.err.println("Error in completed orders: " + e.getMessage());
         }
     }
-  //  private boolean isOrderForCancelledBranch(OrderItem order, String staffBranch) {
-    //    try (BufferedReader reader = new BufferedReader(new FileReader("cancelled_orders.txt"))) {
-      //      String line;
-        //    while ((line = reader.readLine()) != null) {
-          //      String[] parts = line.split(",");
-            //    if (parts.length >= 3 && parts[2].trim().equals(staffBranch)) {
-              //      int orderIDFromFile = Integer.parseInt(parts[0].trim());
-                //    if (order.getOrderID() == orderIDFromFile) {
-                  //      return true;
-                   // }
-                //}
-           // }
     
     public void clearAllOrders() {
     	orders.clear();
@@ -485,7 +473,7 @@ public class OrderStatus {
         Iterator<OrderItem> iterator = orders.iterator();
         while (iterator.hasNext()) {
             OrderItem order = iterator.next();
-            if (order.getOrderStatus() == OrderItem.Status.READY_TO_COLLECT && order.getTimeout() + TIMEOUT_DURATION <= currentTime) {
+            if (order.getOrderStatus() == OrderItem.Status.READY_TO_COLLECT && order.getTimeout() <= currentTime) {
                 order.setOrderStatus(OrderItem.Status.CANCELLED);
                 logCancelledOrder(order); // Log the cancelled order
                 iterator.remove();

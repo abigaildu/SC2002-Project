@@ -1,16 +1,43 @@
 package console;
 import java.util.Scanner;
 
+/**
+Representing MainFrame.
+*/
 public class MainFrame {
+	/**
+	* The CustomerPage object.
+	*/
     private CustomerPage customerPage;
+    /**
+	* The StaffPage object.
+	*/
     private StaffPage staffPage;
     private Scanner scanner;
+    /**
+	* The BranchManagement object.
+	*/
     private BranchManagement branchManagement;
+    /**
+	* The StaffManagement object.
+	*/
     private StaffManagement staffManagement;
+    /**
+	* TheOrderStatus object.
+	*/
     private OrderStatus orderStatus;
+    /**
+	* The OrderManagement object.
+	*/
     private OrderManagement orderManagement;
+    /**
+	* The StaffMenu object.
+	*/
     private StaffMenu staffMenu;
     
+    /**
+     * Creating a new MainFrame.
+     */
     public MainFrame() {
         this.scanner = new Scanner(System.in);
         this.staffManagement = new StaffManagement(branchManagement);
@@ -19,12 +46,12 @@ public class MainFrame {
         this.branchManagement = new BranchManagement(staffManagement);
         this.customerPage = new CustomerPage(this,branchManagement, orderStatus, orderManagement);
         this.staffMenu = new StaffMenu(staffManagement, orderStatus, orderManagement);
-        this.staffPage = new StaffPage(this, staffManagement, staffMenu ,orderStatus);
-        
-        
-        
+        this.staffPage = new StaffPage(this, staffManagement, staffMenu ,orderStatus); 
     }
 
+    /**
+     * Running main page.
+     */
     void run() {
         boolean running = true;
 
@@ -43,7 +70,6 @@ public class MainFrame {
             switch (roleChoice) {
                 case 1:
                     // Show customer interface
-                    //customerPage.displayCustomerOptions();
                 	branchManagement.loadBranches();
                 	customerPage.selectBranchAndDisplayMenu();
                     break;
@@ -71,6 +97,9 @@ public class MainFrame {
         }
     }
     
+    /**
+     * Main method of the program.
+     */
     public static void main(String[] args) {
         MainFrame mainFrame = new MainFrame();
         mainFrame.run();

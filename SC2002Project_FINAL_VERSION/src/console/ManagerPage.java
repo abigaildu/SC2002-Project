@@ -3,18 +3,41 @@ package console;
 import java.util.Scanner;
 import java.util.List;
 import console.Staff;
-//import console.StaffMenu;
 
+/**
+Representing a ManagerPage.
+*/
 public class ManagerPage {
     private Scanner scanner;
+    /**
+	* The Menu object.
+	*/
     private Menu menu; // The menu this manager is responsible for
+    /**
+	* The branch name.
+	*/
     private String branchName; // The name of the branch this manager oversees
+    /**
+	* The StaffMenu object.
+	*/
     private StaffMenu staffMenu;
+    /**
+	* The StaffManagement object.
+	*/
     private StaffManagement staffManagement;
+    /**
+	* The OrderManagement object.
+	*/
     private OrderManagement orderManagement;
     
-    
-
+    /**
+     * Creating a new ManagerPage with the given information.
+     * @param menu Menu object.
+     * @param branchName Branch name.
+     * @param staffManagement StaffManagement object.
+     * @param orderStatus OrderStatus object.
+     * @param orderManagement OrderManagement object.
+     */
     public ManagerPage(Menu menu, String branchName, StaffManagement staffManagement, OrderStatus orderStatus, OrderManagement orderManagement) {
         this.scanner = new Scanner(System.in);
         this.menu = menu;
@@ -26,11 +49,15 @@ public class ManagerPage {
         
     }
 
+    /**
+     * Taking input from users to perform manager's functions.
+     * @param id Manger's id.
+     */
     public void showManagerOptions(String id) {
     	
     	Staff staff = staffManagement.getStaff(id);
     	
-    	if ("password".equals(staff.getpassword())) {
+    	if ("password".equals(staff.getPassword())) {
             System.out.println("Your password is set to the default. Please change it.");
             if (changePassword(id) == false) {
             	return;
@@ -84,6 +111,9 @@ public class ManagerPage {
         }
     }
 
+    /**
+     * Adding a new MenuItem.
+     */
     private void addMenuItem() {
         System.out.print("Enter item name: ");
         String name = scanner.nextLine();
@@ -103,12 +133,18 @@ public class ManagerPage {
         //System.out.println("Menu item added successfully.");
     }
 
+    /**
+     * Removing a MenuItem.
+     */
     private void removeMenuItem() {
         System.out.print("Enter item name to remove: ");
         String name = scanner.nextLine();
         menu.removeMenuItem(name);
     }
 
+    /**
+     * Editing a MenuItem.
+     */
     private void editMenuItem() {
         System.out.print("Enter original item name: ");
         String originalName = scanner.nextLine();
@@ -134,10 +170,17 @@ public class ManagerPage {
         }
     }
 
+    /**
+     * Displaying Menu.
+     */
     private void viewMenu() {
         System.out.println("Current Menu:");
         menu.displayMenu();
     }
+    
+    /**
+     * Displaying staff list.
+     */
     private void displayStaffList() {
         List<Staff> staffList = staffManagement.getStaffListForBranch(branchName);
         if (staffList.isEmpty()) {
@@ -145,11 +188,16 @@ public class ManagerPage {
         } else {
             System.out.println("Staff List for Branch: " + branchName);
             for (Staff staff : staffList) {
-            	System.out.println("- ID: " + staff.getid());
+            	System.out.println("- ID: " + staff.getId());
             }
         }
     }
 
+    /**
+     * Changing staff password.
+     * @param staffId Staff's id.
+     * @return State to indicate whether changing staff password is successful.
+     */
     private boolean changePassword(String staffId) {
         System.out.print("Enter new password: ");
         String newPassword = scanner.nextLine();
@@ -160,6 +208,11 @@ public class ManagerPage {
         return status;
     }
 
+    /**
+     * Logging in.
+     * @param staffId Staff's id.
+     * @return State to indicate whether logging in is successful.
+     */
     private boolean logIn(String staffId) {
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();

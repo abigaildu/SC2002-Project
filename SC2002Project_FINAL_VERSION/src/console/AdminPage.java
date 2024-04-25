@@ -1,22 +1,47 @@
-package console;
+ package console;
 
 import java.util.Scanner;
 import java.util.List;
+
+/**
+Representing a AdminPage.
+*/
 public class AdminPage {
+	/**
+	* The main page.
+	*/
 	private MainFrame main;
+	/**
+	* The StaffManagement object.
+	*/
     private StaffManagement staffManagement;
+    /**
+	* The BranchManagement object.
+	*/
     private BranchManagement branchManagement;
+    /**
+	* The PaymentManagement object.
+	*/
     private PaymentManagement paymentManagement;
     private Scanner scanner;
 
-    public AdminPage(StaffManagement staffManagement, MainFrame m, BranchManagement branchManagement) {
-    	this.main = m;
+    /**
+     * Creating a new AdminPage with the given information.
+     * @param main Main page.
+     * @param staffManagement StaffManagement object.
+     * @param branchManagement BranchManagement object.
+     */
+    public AdminPage(MainFrame main, StaffManagement staffManagement, BranchManagement branchManagement) {
+    	this.main = main;
         this.staffManagement = staffManagement;
         this.branchManagement = branchManagement;
         this.paymentManagement = new PaymentManagement();
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Taking input from users to perform admin's functions.
+     */
     public void showAdminOptions() {
         boolean running = true;
         while (running) {
@@ -78,7 +103,7 @@ public class AdminPage {
             	System.out.print("Enter Branch Name to close: ");
                 String branchName = scanner.nextLine();
         		for(Staff staff: staffManagement.getStaffListForBranch(branchName)) {
-        			staffManagement.deleteStaff(staff.getid());
+        			staffManagement.deleteStaff(staff.getId());
         		}
                 branchManagement.closeBranch(branchName);
                 break;
@@ -109,6 +134,9 @@ public class AdminPage {
         }
     }
 
+    /**
+     * Adding a new Staff.
+     */
     private void addStaff() {
         System.out.print("Enter Staff ID: ");
         String id = scanner.nextLine();
@@ -139,6 +167,9 @@ public class AdminPage {
     }
 
 
+    /**
+     * Editing a Staff.
+     */
     private void editStaff() {
         // Assume you're only editing the password for simplicity
     	 System.out.print("Enter Staff ID to edit: ");
@@ -152,18 +183,13 @@ public class AdminPage {
     	    }
     	    
     	    System.out.println("Editing Staff: " + id);
-    	    //System.out.print("Enter new Branch Name (current: " + staff.getBranchName() + "): ");
-    	    //String branchName = scanner.nextLine();
     	    String branchName = staff.getBranchName();
     	    System.out.print("Enter new Gender (M/F) (current: " + staff.getGender() + "): ");
     	    char gender = scanner.nextLine().charAt(0);
     	    System.out.print("Enter new Age (current: " + staff.getAge() + "): ");
     	    int age = scanner.nextInt();
     	    scanner.nextLine(); // Consume newline
-    	    //System.out.print("Is Branch Manager? (true/false) (current: " + staff.isBranchManager() + "): ");
-    	    //boolean isBranchManager = scanner.nextBoolean();
     	    boolean isBranchManager = staff.isBranchManager();
-    	    //scanner.nextLine(); // Consume newline
 
     	    // Update staff details
     	    boolean success = staffManagement.updateStaffDetails(id, branchName, gender, age, isBranchManager);
@@ -174,6 +200,9 @@ public class AdminPage {
     	    }
     }
 
+    /**
+     * Removing a Staff.
+     */
     private void removeStaff() {
         System.out.print("Enter Staff ID to remove: ");
         String id = scanner.nextLine();
@@ -183,26 +212,35 @@ public class AdminPage {
         }
     }
 
+    /**
+     * Displaying staff list.
+     */
     private void displayStaffList() {
         staffManagement.displayStaffList();
     }
     
+    /**
+     * Promoting a staff to manager.
+     */
     private void promoteToManager() {
         System.out.print("Enter Staff ID to promote to manager: ");
         String id = scanner.nextLine();
         if (staffManagement.promoteToManager(id)) {
             System.out.println("Staff promoted to manager successfully.");
-        } //else {
-           // System.out.println("Failed to promote staff to manager.");
-       // }
+        } 
     }
+    
+    /**
+     * Displaying staff list according to a particular condition.
+     */
     private void filterStaff() {
         StaffFilteringList staffFilteringList = new StaffFilteringList(staffManagement);
         staffFilteringList.filterStaff();
     }
-
-
     
+    /**
+     * Demoting a manager to staff.
+     */
     private void demoteToStaff() {
     	System.out.print("Enter Manager ID to demote: ");
         String demoteId = scanner.nextLine();
@@ -213,6 +251,9 @@ public class AdminPage {
         }
     }
     
+    /**
+     * Transferring a staff to a different branch.
+     */
     private void transferStaff() {
         System.out.print("Enter Staff ID to transfer: ");
         String id = scanner.nextLine();

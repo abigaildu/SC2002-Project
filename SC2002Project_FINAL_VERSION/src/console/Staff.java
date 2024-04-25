@@ -1,42 +1,42 @@
 package console;
 
 /**
-Representing a staff.
+Representing a Staff.
 */
 public class Staff {
 	/**
-	* The id of this staff.
+	* The id of this Staff.
 	*/
 	private String id;
 	/**
-	* The password of this staff.
+	* The password of this Staff.
 	*/
 	private String password;
 	/**
-	* The branch of this staff.
+	* The branch name of this Staff.
 	*/
     private String branchName;
     /**
-	* The gender of this staff.
+	* The gender of this Staff.
 	*/
     private char gender;
     /**
-	* The age of this staff.
+	* The age of this Staff.
 	*/
     private int age;
     /**
-	* The possibility of being a branch manager of this staff.
+	* The possibility of being a branch manager of this Staff.
 	*/
     private boolean isBranchManager;
     
     /**
      * Creating a new Staff with the given information.
-     * @param id This Student's id.
-     * @param password This Student's password.
-     * @param branchName This Student's branch.
-     * @param gender This Student's gender.
-     * @param age This Student's age.
-     * @param branchManager This Student's possibility of being a branch manager.
+     * @param id This Staff's id.
+     * @param password This Staff's password.
+     * @param branchName This Staff's branch name.
+     * @param gender This Staff's gender.
+     * @param age This Staff's age.
+     * @param branchManager This Staff's possibility of being a branch manager.
      */
     public Staff(String id, String password, String branchName, char gender, int age, boolean isBranchManager) {
         this.id = id;
@@ -46,67 +46,100 @@ public class Staff {
         this.age = age;
         this.isBranchManager = isBranchManager;
     }
-
+    
     /**
-     * Getting id of this Staff.
-     * @return this Staff's id.
+     * Getting the id of this Staff.
+     * @return This Staff's id.
      */
-    public String getid() {
-        return id;
-    }
+    public String getId() {
+		return id;
+	}
 
     /**
      * Changing the id of this Staff.
-     * This may involve a lengthy legal process.
      * @param id This Staff's new id.
      */
-    public void setid(String id) {
-        this.id = id;
-    }
-    
-    public String getpassword() {
-        return password;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setpassword(String password) {
-        this.password = password;
-    }
+	/**
+     * Getting the password of this Staff.
+     * @return This Staff's password.
+     */
+	public String getPassword() {
+		return password;
+	}
 
-    public String getBranchName() {
-        return branchName;
-    }
+	/**
+     * Changing the password of this Staff.
+     * @param password This Staff's new password.
+     */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
-    }
+	/**
+     * Getting the branch name of this Staff.
+     * @return This Staff's branch name.
+     */
+	public String getBranchName() {
+		return branchName;
+	}
 
-    public char getGender() {
-        return gender;
-    }
+	/**
+     * Changing the branch name of this Staff.
+     * @param branchName This Staff's new branch name.
+     */
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
 
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
+	/**
+     * Getting the gender of this Staff.
+     * @return This Staff's gender.
+     */
+	public char getGender() {
+		return gender;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	/**
+     * Changing the gender of this Staff.
+     * @param gender This Staff's new gender.
+     */
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-    public boolean isBranchManager() {
-        return branchManager;
-    }
+	/**
+     * Getting the age of this Staff.
+     * @return This Staff's age.
+     */
+	public int getAge() {
+		return age;
+	}
 
-    public void setBranchManager(boolean branchManager) {
-        this.branchManager = branchManager;
-    }
+	/**
+     * Changing the age of this Staff.
+     * @param age This Staff's new age.
+     */
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-
-    // Override toString method for displaying staff details
-    //@Override
-//    public String toString() {
-//        return "Branch Name: " + branchName + ", Gender: " + gender + ", Age: " + age;
-//    }
+	/**
+     * Getting the possibility of being a branch manager of this Staff.
+     * @return This Staff's possibility of being a branch manager.
+     */
+	public boolean isBranchManager() {
+		return isBranchManager;
+	}
+	
+	/**
+     * Changing the possibility of being a branch manager of this Staff.
+     * @param isBranchManager This Staff's new possibility of being a branch manager.
+     */
+	public void setBranchManager(boolean isBranchManager) {
+		this.isBranchManager = isBranchManager;
+	}
 }

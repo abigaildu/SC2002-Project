@@ -12,24 +12,42 @@ import java.util.*;
 import console.MenuItem.Category;
 
 public class Menu {
+	/**
+	* The menu item list.
+	*/
     private List<MenuItem> menuItems;
+    /**
+	* The file path of text file storing menu items.
+	*/
     private String filePath;
 
+    /**
+     * Creating a new Menu with the given information.
+     * @param filePath This Menu's file path.
+     */
     public Menu(String filePath) {
         this.menuItems = new ArrayList<>();
         this.filePath = filePath;
     }
 
-    public void addMenuItem(String name, String description, float price, boolean available, Category category) {
+    /**
+     * Adding a new MenuItem.
+     * @param name MenuItem's name.
+     * @param description MenuItem's description.
+     * @param price MenuItem's price.
+     * @param isAvail MenuItem's state of availability.
+     * @param category MenuItem's category.
+     */
+    public void addMenuItem(String name, String description, float price, boolean isAvail, Category category) {
         // Check if an item with the same name already exists
-        MenuItem existingItem = getMenuItemById(name);
+        MenuItem existingItem = getMenuItemByName(name);
         if (existingItem != null) {
             System.out.println("A menu item with the name '" + name + "' already exists.");
             return; // Return to the original page
         }
 
         // If the item does not exist, add it to the menu
-        MenuItem newItem = new MenuItem(name, description, price, available, category);
+        MenuItem newItem = new MenuItem(name, description, price, isAvail, category);
         menuItems.add(newItem);
         System.out.println("Added new menu item: " + name + " under " + category + " category.");
         saveMenuToFile();
@@ -37,13 +55,23 @@ public class Menu {
         System.out.println("Menu item added successfully.");
     }
     
+    /**
+     * Editing a MenuItem.
+     * @param originalName MenuItem's original name.
+     * @param newName MenuItem's new name.
+     * @param newDescription MenuItem's new description.
+     * @param newPrice MenuItem's new price.
+     * @param newAvailability MenuItem's new state of availability.
+     * @param newCategory MenuItem's new category.
+     * @return State to indicate whether editing a MenuItem is successful.
+     */
     public boolean editMenuItem(String originalName, String newName, String newDescription, float newPrice, boolean newAvailability, MenuItem.Category newCategory) {
         for (MenuItem item : menuItems) {
             if (item.getItemName().equalsIgnoreCase(originalName)) {
                 item.setItemName(newName);
                 item.setItemDesc(newDescription);
                 item.setPrice(newPrice);
-                item.setAvailability(newAvailability);
+                item.setAvail(newAvailability);
                 item.setCategory(newCategory);
                 System.out.println("Menu item updated successfully.");
                 saveMenuToFile();
@@ -55,7 +83,9 @@ public class Menu {
         return false;
     }	
 
-    // Method to display all items, optionally filtered by category
+    /**
+     * Displaying all MenuItems.
+     */
     public void displayMenu() {
     	loadMenuFromFile();
         System.out.println("--- Full Menu ---");
@@ -64,7 +94,10 @@ public class Menu {
         }
     }
 
-    // Overloaded method to display items by category
+    /**
+     * Displaying all MenuItems of a particular category.
+     * @param category MenuItems' category.
+     */
     public void displayMenu(Category category) {
         System.out.println("--- " + category + " Menu ---");
         for (MenuItem item : menuItems) {
@@ -74,7 +107,12 @@ public class Menu {
         }
     }
     
-    public MenuItem getMenuItemById(String itemName) {
+    /**
+     * Getting a MenuItem by name.
+     * @param itemName MenuItem's name.
+     * @return MenuItem.
+     */
+    public MenuItem getMenuItemByName(String itemName) {
         for (MenuItem item : menuItems) {
             if (item.getItemName().equalsIgnoreCase(itemName)) {
                 return item;
@@ -83,6 +121,10 @@ public class Menu {
         return null; // Return null if the item is not found.
     }
     
+    /**
+     * Removing a MenuItem.
+     * @param name MenuItem's name.
+     */
     public void removeMenuItem(String name) {
         // Using an iterator to avoid ConcurrentModificationException while removing
         Iterator<MenuItem> iterator = menuItems.iterator();
@@ -99,7 +141,9 @@ public class Menu {
         System.out.println("Menu item not found: " + name);
     }
     
-    
+    /**
+     * Saving menu to text file.
+     */
     public void saveMenuToFile() {
         ensureDirectoryExists(this.filePath);
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(this.filePath))) {
@@ -112,7 +156,9 @@ public class Menu {
         }
     }
 
-    // Method to load the menu from a file
+    /**
+     * Loading menu from text file.
+     */
     public void loadMenuFromFile() {
         ensureDirectoryExists(this.filePath);
         this.menuItems.clear();
@@ -134,6 +180,10 @@ public class Menu {
         }
     }
     
+    /**
+     * Ensuring that the file path exists.
+     * @param filePath File path to check.
+     */
     private void ensureDirectoryExists(String filePath) {
         Path path = Paths.get(filePath);
         try {

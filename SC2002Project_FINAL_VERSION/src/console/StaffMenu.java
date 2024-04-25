@@ -2,12 +2,30 @@ package console;
 
 import java.util.Scanner;
 
+/**
+Representing a StaffMenu.
+*/
 public class StaffMenu {
+	/**
+	* The StaffManagement object.
+	*/
     private StaffManagement staffManagement;
+    /**
+	* The OrderStatus object.
+	*/
     private OrderStatus orderStatus;
+    /**
+	* The OrderManagement object.
+	*/
     private OrderManagement orderManagement;
     private Scanner scanner;
     
+    /**
+     * Creating a new StaffMenu with the given information.
+     * @param staffManagement StaffManagement object.
+     * @param orderStatus OrderStatus object.
+     * @param orderManagement OrderManagement object.
+     */
     public StaffMenu(StaffManagement staffManagement, OrderStatus orderStatus, OrderManagement orderManagement) {
         this.staffManagement = staffManagement;
         this.orderStatus = orderStatus;
@@ -15,24 +33,10 @@ public class StaffMenu {
         this.scanner = new Scanner(System.in);
     }
 
-//    public void checkPassword(String staffId) {
-//    	Staff staff = staffManagement.getStaff(staffId);
-//        if (staff == null) {
-//            System.out.println("Staff ID not found.");
-//            return;
-//        }
-//
-//        // Check if the staff's password is the default one and prompt for a change
-//        if ("password".equals(staff.getpassword())) {
-//            System.out.println("Your password is set to the default. Please change it.");
-//            if (changePassword(staffId) == false) {
-//            	return;
-//            }
-//            displayMenu();
-//            //return; // Prevents accessing the menu before changing the default password
-//        }
-//    }
-
+    /**
+     * Taking input from users to perform operations on Orders.
+     * @param staffId Staff's id.
+     */
     public void displayMenu(String staffId) {
     	this.orderManagement = OrderManagement.getInstance();
         Staff staff = staffManagement.getStaff(staffId);
@@ -43,7 +47,7 @@ public class StaffMenu {
         
 
         // Check if the staff's password is the default one and prompt for a change
-        if ("password".equals(staff.getpassword())) {
+        if ("password".equals(staff.getPassword())) {
             System.out.println("Your password is set to the default. Please change it.");
             if (changePassword(staffId) == false) {
             	return;
@@ -60,7 +64,6 @@ public class StaffMenu {
             System.out.println("4. Display Cancelled Orders");
             System.out.println("5. Display Completed Orders");
             System.out.println("6. Change order to ready to collect");
-            //System.out.println("7. Delete all orders");
             System.out.println("7. Change Password");
             System.out.println("8. Logout");
             System.out.print("Enter your choice: ");
@@ -79,10 +82,6 @@ public class StaffMenu {
                     System.out.println(details);
                     break;
                 case 3:
-//                    System.out.print("Enter Order ID to process: ");
-//                    int processOrderId = scanner.nextInt();
-//                    scanner.nextLine(); // Consume the newline
-//                    processOrder(staffId, processOrderId);
                 	orderStatus.displayReadyForPickupOrders();
                     break;
                 case 4:
@@ -98,9 +97,6 @@ public class StaffMenu {
                     orderStatus.markOrderAsReadyToCollect(id);
                     System.out.println("Order ID " + id + " has been marked as READY_TO_COLLECT.");
                 	break;
-//                case 7:
-//                    resetOrders();
-//                    break;
                 case 7:
                     changePassword(staffId);
                     break;
@@ -113,42 +109,20 @@ public class StaffMenu {
         } while (choice != 8);
     }
     
-    
-    
+    /**
+     * Displaying new orders.
+     */
     public void displayNewOrders() {
         
         System.out.println("\nNew orders for branch:");
         orderStatus.displayNewOrders();
     }
 
-//    public void viewOrderDetails(int orderId) {
-//        // Assuming getOrderDetailsById method exists in OrderStatus
-//        String details = orderManagement.getOrderDetailsById(orderId);
-//        if (details != null) {
-//            System.out.println("Order details: " + details);
-//        } else {
-//            System.out.println("Order with ID " + orderId + " not found.");
-//        }
-//    }
-
-//    public void processOrder(String staffId, int orderId) {
-//        Staff staff = staffManagement.getStaff(staffId);
-//        if (staff != null) {
-//            // Check if staff password is default and prompt for change
-//            if ("password".equals(staff.getpassword())) {
-//                System.out.println("Your password is set to the default. Please change it.");
-//                changePassword(staffId);
-//                return; // Return to prevent processing the order before password change
-//            }
-//
-//            // Assuming changeOrderStatus method exists in OrderStatus
-//            orderStatus.changeOrderStatus(orderId, OrderItem.Status.ORDER_PROCESSING);
-//            System.out.println("Order with ID " + orderId + " is now being processed.");
-//        } else {
-//            System.out.println("Staff ID not found.");
-//        }
-//    }
-
+    /**
+     * Changing password.
+     * @param staffId Staff's id.
+     * @return State to indicate whether changing password is successful.
+     */
     private boolean changePassword(String staffId) {
         System.out.print("Enter new password: ");
         String newPassword = scanner.nextLine();
@@ -159,6 +133,11 @@ public class StaffMenu {
         return status;
     }
 
+    /**
+     * Logging in.
+     * @param staffId Staff's id.
+     * @return State to indicate whether logging in is successful.
+     */
     private boolean logIn(String staffId) {
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
@@ -172,6 +151,9 @@ public class StaffMenu {
         }
     }
     
+    /**
+     * Deleting all orders.
+     */
     public void resetOrders() {
         System.out.println("Are you sure you want to delete all orders? (Y/N)");
         String confirmation = scanner.nextLine().trim();

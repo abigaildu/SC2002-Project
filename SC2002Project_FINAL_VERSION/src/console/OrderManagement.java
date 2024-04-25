@@ -9,14 +9,30 @@ import java.io.IOException;
 import java.io.*;
 import console.Cart;
 
+/**
+Representing an OrderManagement.
+*/
 public class OrderManagement {
+	/**
+	* The orders.
+	*/
     private Map<Integer, Cart> orders; // Maps order ID to Cart
+    /**
+	* The OrderManagement object.
+	*/
     private static OrderManagement instance;
 
+    /**
+     * Creating a new OrderManagement.
+     */
     public OrderManagement() {
         this.orders = new HashMap<>();
     }
     
+    /**
+     * Getting OrderManagement object synchronously.
+     * @return OrderManagement object.
+     */
     public static synchronized OrderManagement getInstance() {
         if (instance == null) {
             instance = new OrderManagement();
@@ -24,13 +40,21 @@ public class OrderManagement {
         return instance;
     }
 
-    // Method to add a new order
+    /**
+     * Adding an order.
+     * @param orderId Order's id.
+     * @param cart Cart object.
+     */
     public void addOrder(int orderId, Cart cart) {
         cart.setCartID(orderId);
         this.orders.put(orderId, cart);
     }
 
-    // Method to get and display order details by ID
+    /**
+     * Getting order details by id.
+     * @param orderId Order's id.
+     * @return Order details.
+     */
     public String getOrderDetailsById(int orderId) {
         String cartDetailsFilePath = "Cart.txt"; // The file where cart details are stored
         StringBuilder details = new StringBuilder();
@@ -63,6 +87,9 @@ public class OrderManagement {
         }
     }
 
+    /**
+     * Clearing all orders.
+     */
     public void clearAllOrders() {
         orders.clear(); // This clears the map of orders
     }

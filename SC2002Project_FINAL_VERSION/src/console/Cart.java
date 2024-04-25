@@ -13,9 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+Representing a Cart.
+*/
 public class Cart {
     private List<CartItem> cartItems; // Correctly manage a list of CartItem objects
-    //private static int nextCartId = 1;
     private int cartID;
     private boolean isDineIn;
     private static final String CART_DETAILS_FILE_PATH = "Cart.txt";
@@ -74,46 +76,6 @@ public class Cart {
         return total;
     }
 
-    // Checkout method, simplified to just clear the cart and increment cartID
-//    public void checkout(OrderStatus orderStatus) {
-//    	PaymentManagement paymentMethods = new PaymentManagement();
-//    	List<String> methods = paymentMethods.getPaymentMethods();
-//    	if (this.cartItems.isEmpty()) {
-//    		System.out.println("Please select the item!!!");
-//    	} else {
-//    		this.displayCartItems();
-//        	Scanner scanner = new Scanner(System.in);
-//        	
-//        	while (true) {
-//        		System.out.println("\n--- Payment Option ---");
-//        		int index = 1;
-//    	        for (String method : methods) {
-//    	        	System.out.println((index++)+ ". " + method);
-//    	        }
-//    	        System.out.print("Select an option: ");
-//                int choice = scanner.nextInt();
-//                scanner.nextLine(); // Consume newline left-over
-//                
-//                if (choice >= 1 && choice <= methods.size()) {
-//                	String method = methods.get(choice - 1);
-//                	System.out.println("Your payment by " + method + " has been successfully processed.");
-//                	System.out.println(this.getCartID());
-//                	OrderItem order = new OrderItem(this.getCartID());
-//                	order.toString();
-//                	orderStatus.addNewOrders(order);
-//                	break;
-//                } else {
-//                	System.out.println("Invalid option. Please try again.");
-//                }
-//            } 
-////        	
-//            System.out.println("Checkout completed.");
-////          Print receipt.... (havent done)
-//            System.out.println("Your receipt: " + totalCost()); 
-//            clearCart(); // Clear cart after checkout
-//            cartID++;
-//    	}
-//    }
     private void saveCardDetailsFile(String cardNumber, String cvv, String branchName) {
         try {
             FileWriter writer = new FileWriter(CARD_DETAILS_FILE_PATH, true);
@@ -181,13 +143,6 @@ public class Cart {
         cartItems.clear();
         System.out.println("The cart has been cleared.");
     }
-  //  public String getBranchName() {
-   //     return branchName;
-   // }
-
-    //public void setBranchName(String branchName) {
-    //    this.branchName = branchName;
-    //}
 
     // Getter for cartID
     public int getCartID() {
@@ -211,7 +166,7 @@ public class Cart {
     public List<CartItem> getCartItems() {
         return this.cartItems;
     }
-    public static void removeCartDetails(int orderId) {
+    public void removeCartDetails(int orderId) {
         try {
             // Read the existing cart details file
             List<String> lines = Files.readAllLines(Paths.get(CART_DETAILS_FILE_PATH));

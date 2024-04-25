@@ -1,80 +1,158 @@
 package console;
 
+/**
+Representing a MenuItem.
+*/
 public class MenuItem {
-	
 	public enum Category {
 	    FOOD,
 	    DRINK,
 	    DESSERT
 	}
 	
+	/**
+	* The name of this MenuItem.
+	*/
     private String itemName;
+    /**
+	* The description of this MenuItem.
+	*/
     private String itemDesc;
+    /**
+	* The price of this MenuItem.
+	*/
     private float price;
-    private boolean avail;
-    private Category category; // Category of the menu item
+    /**
+	* The state of availability of this MenuItem.
+	*/
+    private boolean isAvail;
+    /**
+	* The category of this MenuItem.
+	*/
+    private Category category; 
 
-    // Constructor
-    public MenuItem(String itemName, String itemDesc, float price, boolean avail, Category category) {
+    /**
+     * Creating a new MenuItem with the given information.
+     * @param itemName This MenuItem's name.
+     * @param itemDesc This MenuItem's description.
+     * @param price This MenuItem's price.
+     * @param isAvail This MenuItem's state of availability.
+     * @param category This MenuItem's category.
+     */
+    public MenuItem(String itemName, String itemDesc, float price, boolean isAvail, Category category) {
+		super();
+		this.itemName = itemName;
+		this.itemDesc = itemDesc;
+		this.price = price;
+		this.isAvail = isAvail;
+		this.category = category;
+	}
+
+    /**
+     * Creating a new MenuItem with the given information.
+     * @param itemName This MenuItem's name.
+     * @param price This MenuItem's price.
+     */
+	public MenuItem(String itemName, float price) {
         this.itemName = itemName;
-        this.itemDesc = itemDesc;
         this.price = price;
-        this.avail = avail;
-        this.category = category;
     }
     
-    public MenuItem(String itemName, float price) {
-        this.itemName = itemName;
-        this.price = price;
-    }
-
-    // Getters and Setters
+	/**
+     * Getting the name of this MenuItem.
+     * @return This MenuItem's name.
+     */
     public String getItemName() {
-        return itemName;
-    }
+		return itemName;
+	}
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
+    /**
+     * Changing the name of this MenuItem.
+     * @param itemName This MenuItem's new name.
+     */
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 
-    public String getItemDesc() {
-        return itemDesc;
-    }
+	/**
+     * Getting the description of this MenuItem.
+     * @return This MenuItem's description.
+     */
+	public String getItemDesc() {
+		return itemDesc;
+	}
 
-    public void setItemDesc(String itemDesc) {
-        this.itemDesc = itemDesc;
-    }
+	/**
+     * Changing the description of this MenuItem.
+     * @param itemDesc This MenuItem's new description.
+     */
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
+	}
 
-    public float getPrice() {
-        return price;
-    }
+	/**
+     * Getting the price of this MenuItem.
+     * @return This MenuItem's price.
+     */
+	public float getPrice() {
+		return price;
+	}
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
+	/**
+     * Changing the price of this MenuItem.
+     * @param price This MenuItem's new price.
+     */
+	public void setPrice(float price) {
+		this.price = price;
+	}
 
-    public boolean isAvailable() {
-        return avail;
-    }
+	/**
+     * Getting the state of availability of this MenuItem.
+     * @return This MenuItem's state of availability.
+     */
+	public boolean isAvail() {
+		return isAvail;
+	}
 
-    public void setAvailability(boolean avail) {
-        this.avail = avail;
-    }
+	/**
+     * Changing the state of availability of this MenuItem.
+     * @param isAvail This MenuItem's new state of availability.
+     */
+	public void setAvail(boolean isAvail) {
+		this.isAvail = isAvail;
+	}
 
-    public Category getCategory() {
-        return category;
-    }
+	/**
+     * Getting the category of this MenuItem.
+     * @return This MenuItem's category.
+     */
+	public Category getCategory() {
+		return category;
+	}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-    
-    @Override
+	/**
+     * Changing the category of this MenuItem.
+     * @param category This MenuItem's new category.
+     */
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	/**
+     * Describing the information of this MenuItem.
+     * @return Information of this MenuItem.
+     */
+	@Override
     public String toString() {
         // Create a string representation of the MenuItem
-        return itemName + "," + itemDesc + "," + price + "," + avail + "," + category.name();
+        return itemName + "," + itemDesc + "," + price + "," + isAvail + "," + category.name();
     }
 
+	/**
+     * Getting MenuItem object from a string.
+     * @param line Information of this MenuItem object.
+     * @return MenuItem object.
+     */
     public static MenuItem fromString(String line) {
         try {
             String[] parts = line.split(",");

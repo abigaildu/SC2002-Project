@@ -4,17 +4,31 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+Representing a PaymentManagement.
+*/
 public class PaymentManagement {
+	/**
+	* The payment methods.
+	*/
     private List<String> paymentMethods;
-    private final String filePath = "payment_methods.txt"; // File path for storing payment methods
+    /**
+	* The file path of text file storing payment methods.
+	*/
+    private final String filePath = "payment_methods.txt";
     
 
+    /**
+     * Creating a new PaymentManagement.
+     */
     public PaymentManagement() {
         this.paymentMethods = new ArrayList<>();
         loadPaymentMethods(); // Load payment methods from file
     }
     
-
+    /**
+     * Loading payment methods from text file.
+     */
     private void loadPaymentMethods() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -34,6 +48,9 @@ public class PaymentManagement {
         }
     }
 
+    /**
+     * Saving payment methods to text file.
+     */
     public void saveToFile() {
         try (PrintWriter out = new PrintWriter(new FileWriter(filePath))) {
             for (String method : paymentMethods) {
@@ -44,6 +61,10 @@ public class PaymentManagement {
         }
     }
 
+    /**
+     * Adding a new payment method.
+     * @param method New payment method.
+     */
     public void addPaymentMethod(String method) {
         if (!paymentMethods.contains(method)) {
             paymentMethods.add(method);
@@ -54,6 +75,10 @@ public class PaymentManagement {
         }
     }
 
+    /**
+     * Removing a payment method.
+     * @param method Payment method to remove.
+     */
     public void removePaymentMethod(String method) {
         if (paymentMethods.contains(method)) {
             paymentMethods.remove(method);
@@ -64,6 +89,9 @@ public class PaymentManagement {
         }
     }
 
+    /**
+     * Displaying all payment methods.
+     */
     public void displayPaymentMethods() {
         System.out.println("Available Payment Methods:");
         if (paymentMethods.isEmpty()) {
@@ -75,6 +103,10 @@ public class PaymentManagement {
         }
     }
     
+    /**
+     * Getting all payment methods.
+     * @return List of all payment methods.
+     */
     public List<String> getPaymentMethods() {
     	return this.paymentMethods;
     }
